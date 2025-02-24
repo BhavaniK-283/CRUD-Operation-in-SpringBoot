@@ -29,10 +29,13 @@ public class UserServiceImpl implements UserService {
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setUniqueCode(userDTO.getUniqueCode());
         user.setEmailId(userDTO.getEmailId());
-        try {
-            user.setStatus(UserStatus.valueOf(userDTO.getStatus().toUpperCase()));
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid status value: " + userDTO.getStatus());
+        String status = userDTO.getStatus().trim();
+        if ("active".equalsIgnoreCase(status)) {
+            user.setStatus(UserStatus.ACTIVE);
+        } else if ("inactive".equalsIgnoreCase(status)) {
+            user.setStatus(UserStatus.INACTIVE);
+        } else {
+            throw new IllegalArgumentException("Invalid status value: " + userDTO.getStatus() + ". Allowed values: ACTIVE, INACTIVE.");
         }
         user.setCreatedBy(userDTO.getCreatedBy());
         user.setUpdatedBy(userDTO.getUpdatedBy());
@@ -66,11 +69,13 @@ public class UserServiceImpl implements UserService {
             existingUser.setPhoneNumber(userDTO.getPhoneNumber());
             existingUser.setUniqueCode(userDTO.getUniqueCode());
             existingUser.setEmailId(userDTO.getEmailId());
-            try {
-
-                existingUser.setStatus(UserStatus.valueOf(userDTO.getStatus().toUpperCase()));
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Invalid status value: " + userDTO.getStatus());
+            String status = userDTO.getStatus().trim();
+            if ("active".equalsIgnoreCase(status)) {
+                existingUser.setStatus(UserStatus.ACTIVE);
+            } else if ("inactive".equalsIgnoreCase(status)) {
+                existingUser.setStatus(UserStatus.INACTIVE);
+            } else {
+                throw new IllegalArgumentException("Invalid status value: " + userDTO.getStatus() + ". Allowed values: ACTIVE, INACTIVE.");
             }
 
             existingUser.setUpdatedBy(userDTO.getUpdatedBy());
