@@ -1,24 +1,25 @@
 package com.example.CRUD.service;
 
+import com.example.CRUD.dto.ApiResponsedto;
+import com.example.CRUD.dto.UpdateUserDto;
 import com.example.CRUD.dto.UserDto;
-import com.example.CRUD.entity.User;
+import com.example.CRUD.dto.UserListDto;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
+@Component
 public interface UserService {
 
-       Optional<User> getUserById(Integer id);
+    UserDto getUserById(Integer id);
 
-       List<User> getAllUsers();
+    UserListDto getAllUsers(String status, String sortOrder, int offset, int limit);
 
+    ApiResponsedto deleteUserById(Integer id);
 
-       void deleteUserById(Integer id);
+    ApiResponsedto createUser(UserDto userDTO);
 
+    ApiResponsedto updateUser(Integer id, UpdateUserDto updateUserDTO);
 
-       User CreateUser(UserDto  userDTO);
-
-
-
-       User updateUser(Integer id, UserDto userDTO);
+    List<UserDto> getUsersByName(String name);
 }

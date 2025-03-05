@@ -2,17 +2,17 @@ package com.example.CRUD.entity;
 
 
 
-import com.example.CRUD.enumurators.UserStatus;
+import com.example.CRUD.enumurators.EnumUserStatus;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "users")
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
         @Id
@@ -34,7 +34,7 @@ public class User {
 
         @Enumerated(EnumType.STRING)
         @Column(nullable = false)
-        private UserStatus status;
+        private EnumUserStatus status;
 
         @Column(name = "created_by")
         private Integer createdBy;
@@ -49,4 +49,83 @@ public class User {
         @UpdateTimestamp
         @Column(name = "updated_at")
         private LocalDateTime updatedAt;
+        public Integer getId() {
+                return id;
+        }
+
+        public void setId(Integer id) {
+                this.id = id;
+        }
+
+        public String getName() {
+                return name;
+        }
+
+        public void setName(String name) {
+                this.name = name;
+        }
+
+        public String getPhoneNumber() {
+                return phoneNumber;
+        }
+
+        public void setPhoneNumber(String phoneNumber) {
+                this.phoneNumber = phoneNumber;
+        }
+
+        public String getUniqueCode() {
+                return uniqueCode;
+        }
+
+        public void setUniqueCode(String uniqueCode) {
+                this.uniqueCode = uniqueCode;
+        }
+
+        public String getEmailId() {
+                return emailId;
+        }
+
+        public void setEmailId(String emailId) {
+                this.emailId = emailId;
+        }
+
+        public EnumUserStatus getStatus() {
+                return status;
+        }
+
+        public void setStatus(EnumUserStatus status) {
+                this.status = status;
+        }
+
+        public Integer getCreatedBy() {
+                return createdBy;
+        }
+
+        public void setCreatedBy(Integer createdBy) {
+                this.createdBy = createdBy;
+        }
+
+        public Integer getUpdatedBy() {
+                return updatedBy;
+        }
+
+        public void setUpdatedBy(Integer updatedBy) {
+                this.updatedBy = updatedBy;
+        }
+
+        public LocalDateTime getCreatedAt() {
+                return createdAt;
+        }
+
+        public void setCreatedAt(LocalDateTime createdAt) {
+                this.createdAt = createdAt;
+        }
+
+        public LocalDateTime getUpdatedAt() {
+                return updatedAt;
+        }
+
+        public void setUpdatedAt(LocalDateTime updatedAt) {
+                this.updatedAt = updatedAt;
+        }
 }

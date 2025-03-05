@@ -1,6 +1,7 @@
 package com.example.CRUD.enumurators;
 
-public enum UserStatus {
+public enum EnumUserStatus {
         ACTIVE,
         INACTIVE
 }
+

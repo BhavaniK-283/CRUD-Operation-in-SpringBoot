@@ -1,48 +1,58 @@
 package com.example.CRUD.controller;
 
+
+import com.example.CRUD.dto.ApiResponsedto;
+import com.example.CRUD.dto.UpdateUserDto;
 import com.example.CRUD.dto.UserDto;
-import com.example.CRUD.entity.User;
+import com.example.CRUD.dto.UserListDto;
 import com.example.CRUD.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    // Get User by ID
     @GetMapping("/{id}")
-    public Optional<User> getUserById(@PathVariable Integer id) {
+    public UserDto getUserById(@PathVariable Integer id) {
         return userService.getUserById(id);
-
     }
+
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public UserListDto getAllUsers(@RequestParam(defaultValue = "BOTH") String status,
+                                   @RequestParam(defaultValue = "ASC") String sortOrder,
+                                   @RequestParam(defaultValue = "0") Integer offset,
+                                   @RequestParam(defaultValue = "2") Integer limit) {
+        return userService.getAllUsers(status, sortOrder, offset, limit);
+
     }
 
     @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable Integer id) {
-        userService.deleteUserById(id);
-        return "User with ID " + id + " has been deleted successfully.";
+    public ApiResponsedto deleteUser(@PathVariable Integer id) {
+        return userService.deleteUserById(id);
+
     }
 
     @PostMapping("/create")
-    public User createUsers(@RequestBody UserDto userDTO) {
+    public ApiResponsedto createUser(@RequestBody UserDto userDTO) {
+        return userService.createUser(userDTO);
 
-        return userService.CreateUser(userDTO);
     }
 
     @PostMapping("/{id}")
-    public User updateUser(@PathVariable Integer id, @RequestBody UserDto userDTO) {
-        User updatedUser = userService.updateUser(id, userDTO);
-        return updatedUser;
+    public ApiResponsedto updateUser(@PathVariable Integer id, @RequestBody UpdateUserDto updateUserDTO) {
+        return userService.updateUser(id, updateUserDTO);
     }
+
+    @GetMapping("/search/{name}")
+    public List<UserDto> getUsersByName(@PathVariable String name) {
+        return userService.getUsersByName(name);
+    }
+
+
 }
