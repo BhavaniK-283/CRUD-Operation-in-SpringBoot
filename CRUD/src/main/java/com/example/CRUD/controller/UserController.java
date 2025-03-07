@@ -7,8 +7,8 @@ import com.example.CRUD.dto.UserDto;
 import com.example.CRUD.dto.UserListDto;
 import com.example.CRUD.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -16,7 +16,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/{id}")
     public UserDto getUserById(@PathVariable Integer id) {
@@ -39,20 +40,20 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ApiResponsedto createUser(@RequestBody UserDto userDTO) {
-        return userService.createUser(userDTO);
-
+    public ApiResponsedto createUser(@RequestBody UserDto userDTO, @RequestHeader("createdBy") String createdBy) {
+        return userService.createUser(userDTO, createdBy);
     }
 
     @PostMapping("/{id}")
-    public ApiResponsedto updateUser(@PathVariable Integer id, @RequestBody UpdateUserDto updateUserDTO) {
-        return userService.updateUser(id, updateUserDTO);
+    public ApiResponsedto updateUser(@PathVariable Integer id, @RequestBody UpdateUserDto updateUserDTO, @RequestHeader("updatedBy") String updatedBy) {
+        return userService.updateUser(id, updateUserDTO, updatedBy);
     }
 
-    @GetMapping("/search/{name}")
-    public List<UserDto> getUsersByName(@PathVariable String name) {
-        return userService.getUsersByName(name);
+    @GetMapping("/search")
+    public List<UserDto> getUsersBySearch(@RequestParam(required = false) Integer id,
+                                          @RequestParam(required = false) String uniqueCode,
+                                          @RequestParam(required = false) String name,
+                                          @RequestParam(required = false) String email) {
+        return userService.getUsersBySearch(id, uniqueCode, name,email);
     }
-
-
 }

@@ -7,5 +7,7 @@ public class ResponseConstants {
     public static final String NULL_NAME_MESSAGE = "Name cannot be null.";
     public static final String NULL_PHONE_MESSAGE = "Phone Number cannot be null.";
     public static final String NULL_EMAIL_MESSAGE = "Email Id cannot be null.";
+    public static final String ERROR_MESSAGE = "User ID must be an integer.";
+
 
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public interface UserService {
 
     UserDto getUserById(Integer id);
@@ -17,9 +16,9 @@ public interface UserService {
 
     ApiResponsedto deleteUserById(Integer id);
 
-    ApiResponsedto createUser(UserDto userDTO);
+    ApiResponsedto createUser(UserDto userDTO,String createdBy);
 
-    ApiResponsedto updateUser(Integer id, UpdateUserDto updateUserDTO);
+    ApiResponsedto updateUser(Integer id, UpdateUserDto updateUserDTO, String updatedBy);
 
-    List<UserDto> getUsersByName(String name);
+    List<UserDto> getUsersBySearch(Integer id, String uniqueCode, String name, String email);
 }

@@ -1,7 +1,4 @@
 package com.example.CRUD.entity;
-
-
-
 import com.example.CRUD.enumurators.EnumUserStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,8 +10,8 @@ import java.time.LocalDateTime;
 @Table(name = "users")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
 
+public class User {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "id")
@@ -37,10 +34,10 @@ public class User {
         private EnumUserStatus status;
 
         @Column(name = "created_by")
-        private Integer createdBy;
+        private String createdBy;
 
         @Column(name = "updated_by")
-        private Integer updatedBy;
+        private String updatedBy;
 
         @CreationTimestamp
         @Column(name = "created_at", updatable = false)
@@ -49,6 +46,8 @@ public class User {
         @UpdateTimestamp
         @Column(name = "updated_at")
         private LocalDateTime updatedAt;
+
+
         public Integer getId() {
                 return id;
         }
@@ -97,19 +96,19 @@ public class User {
                 this.status = status;
         }
 
-        public Integer getCreatedBy() {
+        public String getCreatedBy() {
                 return createdBy;
         }
 
-        public void setCreatedBy(Integer createdBy) {
+        public void setCreatedBy(String createdBy) {
                 this.createdBy = createdBy;
         }
 
-        public Integer getUpdatedBy() {
+        public String getUpdatedBy() {
                 return updatedBy;
         }
 
-        public void setUpdatedBy(Integer updatedBy) {
+        public void setUpdatedBy(String updatedBy) {
                 this.updatedBy = updatedBy;
         }
 
@@ -128,4 +127,5 @@ public class User {
         public void setUpdatedAt(LocalDateTime updatedAt) {
                 this.updatedAt = updatedAt;
         }
+
 }

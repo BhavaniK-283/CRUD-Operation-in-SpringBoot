@@ -2,18 +2,16 @@ package com.example.CRUD.dto;
 
 import lombok.*;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
+
 
     private String name;
     private String phoneNumber;
     private String uniqueCode;
     private String emailId;
     private String status;
-    private Integer createdBy;
-    private Integer updatedBy;
 
     public String getName() {
         return name;
@@ -53,21 +51,5 @@ public class UserDto {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Integer getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Integer getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(Integer updatedBy) {
-        this.updatedBy = updatedBy;
     }
 }

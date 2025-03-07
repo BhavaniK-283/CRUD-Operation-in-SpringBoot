@@ -1,10 +1,8 @@
 package com.example.CRUD.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateUserDto {
@@ -13,7 +11,6 @@ public class UpdateUserDto {
     private String uniqueCode;
     private String emailId;
     private String status;
-    private Integer updatedBy;
 
     public String getName() {
         return name;
@@ -53,13 +50,5 @@ public class UpdateUserDto {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Integer getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(Integer updatedBy) {
-        this.updatedBy = updatedBy;
     }
 }
